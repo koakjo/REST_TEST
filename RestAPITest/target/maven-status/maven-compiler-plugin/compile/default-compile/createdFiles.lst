@@ -1,0 +1,8 @@
+com/resttest/app/RestTestController.class
+com/resttest/domain/business/RestTestBusinessLogic.class
+com/resttest/infra/repository/RestTestRepository.class
+com/resttest/app/message/RestTestRequestMessage.class
+com/resttest/domain/entity/REST_TEST_PK.class
+com/resttest/app/RestTestApplication.class
+com/resttest/infra/repository/JpaWrapper.class
+com/resttest/domain/entity/REST_TEST.class
