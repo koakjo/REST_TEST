@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Built-By: takehiko
+Build-Jdk: 17-beta
+Created-By: Maven Integration for Eclipse
+
