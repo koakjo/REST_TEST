@@ -6,6 +6,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" output="RestAPITest/RestTestApp/WEB-INF/META-INF" path="src/main/webapp/WEB-INF/META-INF"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -36,5 +37,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="output" path="target/classes"/>
+	<classpathentry kind="output" path="RestTestApp/WEB-INF/"/>
 </classpath>

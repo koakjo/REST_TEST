@@ -10,8 +10,7 @@ import lombok.NonNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@NoJackson
-public class RestTestRequestMessage {
+public class RestTestRequest2Message {
 	
 	@NonNull
 	@Size(min=1)
@@ -19,5 +18,7 @@ public class RestTestRequestMessage {
 	
 	@Size(min=1)
 	private String name;
+	
+	private RestTestRequestMessage message;
 
 }

@@ -2,6 +2,8 @@ package com.resttest.app;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -13,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.resttest.app.message.RestTestRequest2Message;
 import com.resttest.app.message.RestTestRequestMessage;
 import com.resttest.domain.business.RestTestBusinessLogic;
 
@@ -44,6 +46,9 @@ public class RestTestController {
 	 * おそらくこのPOSTで受け取るjson文字列によって
 	 * キャスト先のクラスを判断するロジックを本番では入れないといけないイメージです
 	 * 以下ではJAX-RS標準でキャストさせてしまっているのでどのようにやるかあまりイメージついていないです
+	 * (2021/11/21 追記:MessageBodyWriterなる実装が入っているようです。これを独自実装するときはinterfaceとしての
+	 * MessageBodyWriterをimplementsし、実装をしたあとに@Providerをつける形になります。
+	 * interfaceのまま参照実装をそのまま使えるのはjava1.8以降のコンパイラ機能です)
 	 */
 	@Path("/postjson")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -53,6 +58,24 @@ public class RestTestController {
 		
 		System.out.println(message.getId());
 		System.out.println(message.getName());
+		
+		try {
+			return Response.ok().build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+	}
+	
+	@Path("/postjson2")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@POST
+	public Response postjson2(@Valid RestTestRequest2Message message) throws Exception{
+		
+		
+		Jsonb jsonb = JsonbBuilder.create();
+		System.out.println(jsonb.toJson(message));
 		
 		try {
 			return Response.ok().build();
@@ -87,9 +110,29 @@ public class RestTestController {
 			RestTestRequestMessage reqMessage = new RestTestRequestMessage();
 			reqMessage.setId("test");
 			reqMessage.setName("testName");
-			ObjectMapper mapper = new ObjectMapper();
 			
-			System.out.println(mapper.writeValueAsString(reqMessage));
+			return Response.ok().build();
+		
+		}catch (Exception e) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+	}
+	
+	@Path("/testjsonb")
+	@Produces()
+	@GET
+	public Response testjsonb() throws Exception{
+		
+		try {
+		
+			RestTestRequest2Message reqMessage = new RestTestRequest2Message();
+			reqMessage.setId("test");
+			reqMessage.setName("testName");
+			reqMessage.setMessage(new RestTestRequestMessage());
+			Jsonb jsonb = JsonbBuilder.create();
+			
+			//System.out.println(mapper.writeValueAsString(reqMessage));
+			System.out.println(jsonb.toJson(reqMessage));
 			
 			return Response.ok().build();
 		
