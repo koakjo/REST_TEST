@@ -4,6 +4,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
+import javax.transaction.RollbackException;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -137,6 +138,31 @@ public class RestTestController {
 			return Response.ok().build();
 		
 		}catch (Exception e) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+	}
+	
+	@Path("/testtimeout")
+	@Produces()
+	@GET
+	//タイムアウトを狙います。wildflyのdefault-timeout設定を60秒にした状態で、このメソッドを実行します
+	public Response testtimeout() throws Exception{
+		
+		try {
+			System.out.println("started!!!");
+			String test = logic.getTimeOutException("this is transaction-timeout test");
+			System.out.println(test);
+			return Response.ok().build();
+		
+
+		}catch (RollbackException e) {
+			System.out.println("success transaction-timout test");
+			e.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).build();
+			
+		}catch (Exception e) {
+			System.out.println("failed transaction-timout test");
+			e.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).build();
 		}
 	}

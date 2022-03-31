@@ -3,6 +3,7 @@ package com.resttest.domain.business;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import com.resttest.domain.entity.REST_TEST;
 import com.resttest.domain.entity.REST_TEST_PK;
@@ -19,6 +20,7 @@ public class RestTestBusinessLogic {
 	@Inject
 	RestTestResource resource;
 	
+	
 	public String getName(String id) throws Exception{
 		
 		REST_TEST_PK pkEntity = new REST_TEST_PK();
@@ -31,5 +33,16 @@ public class RestTestBusinessLogic {
 			return entity.getName();
 		}
 	}
+	
+	@Transactional
+	public String getTimeOutException(String id) throws Exception{
+		
+		
+		//120秒のスリープ
+		Thread.sleep(100000);;
+		
+		return id;
+	}
+	
 
 }
