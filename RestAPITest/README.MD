@@ -78,6 +78,8 @@ WildFlyを実行している状態で、HTTP経由で行います。
 以下をブラウザにて実行ください。
 http://127.0.0.1:8080/RestTestApp/Rest/Test/hello
 
+http://127.0.0.1:8080/RestClient/test/method15
+
 "HELLO"みたいな文字列が帰ってきます。
 
 [POST]

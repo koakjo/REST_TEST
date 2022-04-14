@@ -21,5 +21,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="lib" path="/Users/takehiko/Downloads/jar_files/resilience4j-timelimiter-1.7.1.jar"/>
 	<classpathentry kind="output" path="WEB-INF/"/>
 </classpath>

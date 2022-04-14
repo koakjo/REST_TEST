@@ -10,6 +10,13 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <jta-data-source>java:/PostgresDS</jta-data-source>
     <class>com.resttest.domain.entity.REST_TEST</class>
+    <properties>
+    	<property name="hibernate.connection.isolation" value="2"/>
+    		<!-- 1: READ UNCOMMITTED
+			 	2: READ COMMITTED
+			 	4: REPEATABLE READ
+			 	8: SERIALIZABLE -->
+    </properties>
   </persistence-unit>
   
 </persistence>
